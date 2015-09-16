@@ -18,11 +18,6 @@ public class PipeTest
     public PipeTest( String testName )
     {
         super( testName );
-        
-        Pipe pipe = new Pipe();
-        pipe.registerFilter(new Filter()).registerFilter(new Filter());
-        
-        pipe.run();
     }
 
     /**
@@ -38,6 +33,12 @@ public class PipeTest
      */
     public void testApp()
     {
-        assertTrue( true );
+    	Pipe pipe = new Pipe();
+        Filter filter = new FilterTest("a");
+        pipe.registerFilter(filter).registerFilter(filter);
+        
+        pipe.run();
+        
+        assertTrue(filter.getOutput().length() == 4);
     }
 }

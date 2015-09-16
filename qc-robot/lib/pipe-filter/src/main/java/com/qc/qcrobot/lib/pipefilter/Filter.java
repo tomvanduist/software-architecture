@@ -1,5 +1,8 @@
 package com.qc.qcrobot.lib.pipefilter;
 
-public class Filter {
+public interface Filter {
 	
+	public String perform(String input);
+	
+	public String getOutput();
 }

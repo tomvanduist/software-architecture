@@ -11,13 +11,13 @@ public class Pipe {
 	
 	public Pipe registerFilter(Filter filter) {
 		this.filterList.add(filter);
-		System.err.println(this.filterList.get(this.filterList.indexOf(filter)));
 		return this;
 	}
 	
 	public void run() {
+		String current = null;
 		for (Filter f : this.filterList) {
-			System.err.println(f);
+			current = f.perform(current);
 		}
 	}
 }
