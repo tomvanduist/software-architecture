@@ -5,7 +5,7 @@ import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
 /**
- * Unit test for simple App.
+ * Unit test for pipe-filter.
  */
 public class PipeTest extends TestCase {
     /**
@@ -25,6 +25,7 @@ public class PipeTest extends TestCase {
     }
     
     /**
+     * Tests the pipeline with an Integer.
      * 
      * @throws Exception
      */
@@ -41,6 +42,7 @@ public class PipeTest extends TestCase {
     }
     
     /**
+     * Tests the pipeline with a String.
      * 
      * @throws Exception
      */
@@ -57,7 +59,7 @@ public class PipeTest extends TestCase {
     }
     
     /**
-     * 
+     * Tests if PipeInputTypeException is properly thrown.
      */
     public void testPipeInputTypeException() {
     	PipeSourceTest<Integer> source = new PipeSourceTest<Integer>(0);
@@ -74,7 +76,7 @@ public class PipeTest extends TestCase {
     }
 
     /**
-     * 
+     * Tests if PipeMissingSinkException is thrown when the Pipe does not contain a Sink.
      */
     public void testPipeMissingSinkException() {
     	PipeSourceTest<Object> source = new PipeSourceTest<Object>();
@@ -89,7 +91,7 @@ public class PipeTest extends TestCase {
     }
     
     /**
-     * 
+     * Tests if PipeSinkConnectionException is thrown when a filter is connected as output to a Sink.
      */
     public void testPipeSinkConnectionException() {
     	PipeSinkTest sink = new PipeSinkTest();
