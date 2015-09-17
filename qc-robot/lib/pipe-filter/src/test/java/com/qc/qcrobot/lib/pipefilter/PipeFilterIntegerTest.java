@@ -4,7 +4,9 @@ package com.qc.qcrobot.lib.pipefilter;
  * @author FT_5
  * @company Quality Control
  * @date Sep 17, 2015
- *
+ * 
+ * An example PipeFilter used for UnitTesting.
+ * It will process integer input and writes its successor (++) as output.
  */
 public class PipeFilterIntegerTest extends AbstractPipeFilter {
 
