@@ -7,6 +7,7 @@
 
 * Eclipse
 * Maven
+* JDK 1.8
 
 ## Instructions
 Simply pull the repo, you can now run the maven commands. For Eclipse choose File -> Import -> Existing Maven Project. You can then choose which component you want.
