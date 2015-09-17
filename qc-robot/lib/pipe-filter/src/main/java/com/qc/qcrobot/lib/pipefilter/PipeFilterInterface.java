@@ -1,10 +1,6 @@
 package com.qc.qcrobot.lib.pipefilter;
 
 /**
- * @author FT_5
- * @company Quality Control
- * @date Sep 17, 2015
- *
  * The PipeFilterInterface is the base interface of the Pipe&Filter pattern pipeline.
  * Filters can be chained by connecting multiple PipeFilterPatterns in a list to form a Pipe.
  * A pipe has to start with an active filter, the PipeSource. The source will generate the input

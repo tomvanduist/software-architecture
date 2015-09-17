@@ -1,10 +1,6 @@
 package com.qc.qcrobot.lib.pipefilter;
 
 /**
- * @author FT_5
- * @company Quality Control
- * @date Sep 17, 2015
- * 
  * Extend this class to implement a PipeSink.
  */
 public abstract class AbstractPipeSink extends AbstractPipeFilter implements PipeSinkInterface {

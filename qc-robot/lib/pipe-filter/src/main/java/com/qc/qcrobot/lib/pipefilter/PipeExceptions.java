@@ -1,10 +1,6 @@
 package com.qc.qcrobot.lib.pipefilter;
 
 /**
- * @author FT_5
- * @company Quality Control
- * @date Sep 17, 2015
- *
  * Thrown when the filter input does not match the expected type.
  */
 class PipeInputTypeException extends Exception {
@@ -17,10 +13,6 @@ class PipeInputTypeException extends Exception {
 }
 
 /**
- * @author FT_5
- * @company Quality Control
- * @date Sep 17, 2015
- * 
  * Thrown when the Pipeline does not contain a sink as the last filter.
  */
 class PipeMissingSinkException extends Exception {
@@ -33,10 +25,6 @@ class PipeMissingSinkException extends Exception {
 }
 
 /**
- * @author FT_5
- * @company Quality Control
- * @date Sep 17, 2015
- *
  * Thrown when a filter is added as a connction to a sink.
  * A sink should be the last filter, so it should not contain an output filter.
  */

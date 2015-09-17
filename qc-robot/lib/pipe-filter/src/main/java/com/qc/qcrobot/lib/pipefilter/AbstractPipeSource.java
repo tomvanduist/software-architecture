@@ -1,10 +1,6 @@
 package com.qc.qcrobot.lib.pipefilter;
 
 /**
- * @author FT_5
- * @company Quality Control
- * @date Sep 17, 2015
- * 
  * Extend this class to implement a PipeSource
  */
 public abstract class AbstractPipeSource extends AbstractPipeFilter implements PipeSourceInterface {

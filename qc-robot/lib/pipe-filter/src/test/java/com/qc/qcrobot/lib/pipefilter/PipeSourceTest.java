@@ -1,10 +1,6 @@
 package com.qc.qcrobot.lib.pipefilter;
 
 /**
- * @author FT_5
- * @company Quality Control
- * @date Sep 17, 2015
- * 
  * @param <T>
  * 
  * An example PipeSource used for UnitTesting.
