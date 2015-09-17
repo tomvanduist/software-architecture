@@ -12,6 +12,7 @@
 Simply pull the repo, you can now run the maven commands. For Eclipse choose File -> Import -> Existing Maven Project. You can then choose which component you want.
 
 ## Build Commands	
+Open terminal in the root folder (qcrobot) than you can run the following commands:
 
 * Build & test everything: mvn package
 * Build & test pipe-filter: mvn package -pl lib/pipe-filter
