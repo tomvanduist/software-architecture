@@ -2,5 +2,5 @@ package com.qc.qcrobot.lib.pipefilter;
 
 public interface PipeSourceInterface extends PipeFilterInterface {
 	
-	public void start();
+	public void start() throws PipeInputTypeException, PipeMissingSinkException;
 }

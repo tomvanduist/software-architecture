@@ -2,9 +2,9 @@ package com.qc.qcrobot.lib.pipefilter;
 
 public interface PipeFilterInterface {
 	
-	public void read(String input);
+	public <T> void read(T input) throws PipeInputTypeException, PipeMissingSinkException;
 	
-	public void write(String output);
+	public <T> void write(T output) throws PipeInputTypeException, PipeMissingSinkException;
 	
-	public PipeFilterInterface connect(PipeFilterInterface output) throws Exception;
+	public PipeFilterInterface connect(PipeFilterInterface output) throws PipeSinkConnectionException;
 }

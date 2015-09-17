@@ -1,16 +1,19 @@
 package com.qc.qcrobot.lib.pipefilter;
 
-public class PipeSourceTest extends AbstractPipeSource {
+public class PipeSourceTest<T> extends AbstractPipeSource {
 
-	private String input;
+	private T input;
 	
+	public PipeSourceTest() {
+		super();
+	}
 	
-	public PipeSourceTest(String input) {
+	public PipeSourceTest(T input) {
 		super();
 		this.input = input;
 	}
 
-	public void start() {
+	public void start()  throws PipeInputTypeException, PipeMissingSinkException {
 		this.write(this.input);
 	}
 }

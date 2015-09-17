@@ -7,51 +7,100 @@ import junit.framework.TestSuite;
 /**
  * Unit test for simple App.
  */
-public class PipeTest 
-    extends TestCase
-{
+public class PipeTest extends TestCase {
     /**
      * Create the test case
      *
      * @param testName name of the test case
      */
-    public PipeTest( String testName )
-    {
+    public PipeTest( String testName ) {
         super( testName );
     }
 
     /**
      * @return the suite of tests being tested
      */
-    public static Test suite()
-    {
+    public static Test suite() {
         return new TestSuite( PipeTest.class );
     }
     
-    
-    public void testPipeline() throws Exception {
-    	PipeSourceTest source = new PipeSourceTest("ppp");
-    	PipeFilterTest filter = new PipeFilterTest();
+    /**
+     * 
+     * @throws Exception
+     */
+    public void testPipelineInteger() throws Exception {
+    	PipeSourceTest<Integer> source = new PipeSourceTest<Integer>(0);
+    	PipeFilterIntegerTest filter = new PipeFilterIntegerTest();
     	PipeSinkTest sink = new PipeSinkTest();
     	
     	source.connect(filter).connect(sink);
     	
     	source.start();
     	
-    	assertTrue(sink.outputVar.equals("ccc"));
+    	assertTrue(sink.outputInt == 1);
+    }
+    
+    /**
+     * 
+     * @throws Exception
+     */
+    public void testPipelineString() throws Exception {
+    	PipeSourceTest<String> source = new PipeSourceTest<String>("ppp");
+    	PipeFilterStringTest filter = new PipeFilterStringTest();
+    	PipeSinkTest sink = new PipeSinkTest();
+    	
+    	source.connect(filter).connect(sink);
+    	
+    	source.start();
+    	
+    	assertTrue(sink.outputString.equals("ccc"));
+    }
+    
+    /**
+     * 
+     */
+    public void testPipeInputTypeException() {
+    	PipeSourceTest<Integer> source = new PipeSourceTest<Integer>(0);
+    	PipeFilterStringTest filter = new PipeFilterStringTest();
+    	
+    	try {
+    		source.connect(filter);
+    		source.start();
+    	} catch (Exception e) {
+    		if ( !(e instanceof PipeInputTypeException) ) {
+    			fail("Expected Exception: " + new PipeInputTypeException().getMessage());
+    		}
+    	}
     }
 
     /**
      * 
      */
-    public void testSinkAsFilterException()
-    {
+    public void testPipeMissingSinkException() {
+    	PipeSourceTest<Object> source = new PipeSourceTest<Object>();
+    	
+    	try {
+    		source.start();
+    	} catch (Exception e) {
+    		if ( !(e instanceof PipeMissingSinkException) ) {
+    			fail("Expected Exception: " + new PipeMissingSinkException().getMessage());
+    		}
+    	}
+    }
+    
+    /**
+     * 
+     */
+    public void testPipeSinkConnectionException() {
     	PipeSinkTest sink = new PipeSinkTest();
     	
     	try {
     		sink.connect(sink);
-    		fail("Expected Exception! Sinks should have no more connections.");
-    	} catch (Exception e) {}
+    	} catch (Exception e) {
+    		if ( !(e instanceof PipeSinkConnectionException) ) {
+    			fail("Expected Exception: " + new PipeSinkConnectionException().getMessage());
+    		}
+    	}
     }
     
 }
