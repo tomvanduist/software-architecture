@@ -29,8 +29,16 @@ public class PipeTest
     }
     
     
-    public void testPipeline() {
+    public void testPipeline() throws Exception {
+    	PipeSourceTest source = new PipeSourceTest("ppp");
+    	PipeFilterTest filter = new PipeFilterTest();
+    	PipeSinkTest sink = new PipeSinkTest();
     	
+    	source.connect(filter).connect(sink);
+    	
+    	source.start();
+    	
+    	assertTrue(sink.outputVar.equals("ccc"));
     }
 
     /**
