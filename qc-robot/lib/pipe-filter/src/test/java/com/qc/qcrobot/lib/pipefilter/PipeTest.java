@@ -27,18 +27,23 @@ public class PipeTest
     {
         return new TestSuite( PipeTest.class );
     }
+    
+    
+    public void testPipeline() {
+    	
+    }
 
     /**
-     * Rigourous Test :-)
+     * 
      */
-    public void testApp()
+    public void testSinkAsFilterException()
     {
-    	Pipe pipe = new Pipe();
-        Filter filter = new FilterTest("a");
-        pipe.registerFilter(filter).registerFilter(filter);
-        
-        pipe.run();
-        
-        assertTrue(filter.getOutput().length() == 4);
+    	PipeSinkTest sink = new PipeSinkTest();
+    	
+    	try {
+    		sink.connect(sink);
+    		fail("Expected Exception! Sinks should have no more connections.");
+    	} catch (Exception e) {}
     }
+    
 }
