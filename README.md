@@ -15,6 +15,6 @@ Simply pull the repo, you can now run the maven commands. For Eclipse choose Fil
 
 * Build everything: mvn package
 * Build pipe-filter: mvn package -pl lib/pipe-filter
-* Test everything: mvn validate
-* Test pipe-filter: mvn validate -pl lib/pipe-filter
+* Test everything: mvn test
+* Test pipe-filter: mvn test -pl lib/pipe-filter
 * Clean the project: mvn clean
