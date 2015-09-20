@@ -5,30 +5,59 @@ import java.util.Queue;
 
 /**
  * Extend this class to implement a PipeFilter
- * @param <T>
- * @param <I>
+ * 
+ * @param <I> Input type
+ * @param <O> Output type
  */
-public abstract class AbstractPipeFilter<I, O> extends Thread implements InterfacePipeFilter<I, O> {
+public abstract class AbstractPipeFilter<I, O> extends Thread implements InterfacePipe<I> {
 
+	// Output to write handled input
 	protected InterfacePipe<O> output;
 	
+	// Input queue
 	protected Queue<I> queue = new LinkedList<I>();
 	
+	
+	/**
+	 * Initialize with next filter in the chain.
+	 * 
+	 * @param output Output filter to write handled input to.
+	 */
 	public AbstractPipeFilter(InterfacePipe<O> output) {
 		this.output = output;
 	}
+
 	
+	/**
+	 * Implement this method to handle the input and write it to the output.
+	 * 
+	 * @param input Input data to be handled.
+	 * @param output Output filter to write the handled input to.
+	 */
+	protected abstract void filter(I input, InterfacePipe<O> output);
 	
-	@Override
+	/**
+	 * {@inheritDoc}
+	 */
+	protected I read() {
+		if ( this.queue != null && !this.queue.isEmpty() )  {
+			return this.queue.remove();
+		}
+		return null;
+	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
 	public void write(I input) {
 		if ( this.queue != null ) {
 			this.queue.add(input);
 		}
 	}
 	
-	
-
-	@Override
+	/**
+	 * Let input data be handled by the filter. The filter should write the handled data to the output.
+	 */
 	public void run() {
 		while ( this.isAlive() ) {
 			I input = this.read();
@@ -38,27 +67,24 @@ public abstract class AbstractPipeFilter<I, O> extends Thread implements Interfa
 		}
 	}
 	
-	protected I read() {
-		if ( this.queue != null && !this.queue.isEmpty() )  {
-			return this.queue.remove();
-		}
-		return null;
-	}
-	
-	protected abstract void filter(I input, InterfacePipe<O> output);
-
-	
-	public synchronized void start() {
+	/**
+	 * {@inheritDoc}
+	 */
+	public synchronized void begin() throws PipeMissingSinkException {
 		super.start();
 		if ( this.output != null ) {
-			this.output.start();
+			this.output.begin();
+		} else {
+			throw new PipeMissingSinkException();
 		}
 	}
 
-	@Override
-	public void interrupt() {
+	/**
+	 * {@inheritDoc}
+	 */
+	public void end() {
 		if ( this.output != null ) {
-			this.output.interrupt();
+			this.output.end();
 		}
 		super.interrupt();
 	}

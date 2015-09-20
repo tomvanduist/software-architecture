@@ -8,7 +8,7 @@ public class PipeSinkTest extends AbstractPipeSink<String> {
 
 	
 	@Override
-	protected void process(String input) {
+	public void process(String input) {
 		System.out.println(input);
 		this.outputString = input;
 		if ( this.notifyObject != null ) {
@@ -22,6 +22,13 @@ public class PipeSinkTest extends AbstractPipeSink<String> {
 	}
 	
 	
+	
+//	@Override
+//	public synchronized void begin() {
+//		super.run();
+//	}
+	
+
 	public String outputString;
 //	public Integer outputInt;
 //
@@ -32,5 +39,6 @@ public class PipeSinkTest extends AbstractPipeSink<String> {
 //			this.outputInt = (Integer) input;
 //		}
 //	}
+	
 
 }

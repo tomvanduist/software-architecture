@@ -8,17 +8,26 @@ package com.qc.qcrobot.lib.pipefilter;
  */
 public class PipeSourceTest extends AbstractPipeSource<String> {
 
-	
+	private String input;
 
-	public PipeSourceTest(InterfacePipe<String> output) {
+	public PipeSourceTest(String input, InterfacePipe<String> output) {
 		super(output);
+		this.input = input;
 	}
 
 
 	@Override
 	protected String read() {
-		return (String) "Hoi";
+		return input;
 	}
+
+
+//	@Override
+//	public synchronized void begin() throws PipeMissingSinkException {
+//		super.run();
+//	}
+	
+	
 
 //	private T input;
 //	

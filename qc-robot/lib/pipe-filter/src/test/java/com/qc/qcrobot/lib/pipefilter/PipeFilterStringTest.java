@@ -11,9 +11,16 @@ public class PipeFilterStringTest extends AbstractPipeFilter<String, String> {
 	}
 
 	@Override
-	protected void filter(String input, InterfacePipe<String> output) {
+	public void filter(String input, InterfacePipe<String> output) {
 		output.write(input);
 	}
+
+//	@Override
+//	public synchronized void begin() throws PipeMissingSinkException {
+//		super.run();
+//	}
+	
+	
 
 //	public <T> void read(T input) throws PipeInputTypeException, PipeMissingSinkException {
 //		String sInput = null;

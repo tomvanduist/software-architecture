@@ -5,13 +5,26 @@ import java.util.Queue;
 
 /**
  * Extend this class to implement a PipeSink.
+ * 
+ *  @param <I> Input type
  */
-public abstract class AbstractPipeSink<I> extends Thread implements InterfacePipeSink<I> {
+public abstract class AbstractPipeSink<I> extends Thread implements InterfacePipe<I> {
 
+	// Input queue
 	protected Queue<I> queue = new LinkedList<I>();
 	
 	
+	/**
+	 * Implement this method to process the input as the last filter in the chain.
+	 * 
+	 * @param input Input data to be processed.
+	 */
+	protected abstract void process(I input);
 	
+	
+	/**
+	 * {@inheritDoc}
+	 */
 	protected I read() {
 		if ( this.queue != null && !this.queue.isEmpty() )  {
 			return this.queue.remove();
@@ -19,20 +32,18 @@ public abstract class AbstractPipeSink<I> extends Thread implements InterfacePip
 		return null;
 	}
 	
-	
-	
-	@Override
+	/**
+	 * {@inheritDoc}
+	 */
 	public void write(I input) {
 		if ( this.queue != null ) {
 			this.queue.add(input);
 		}
 	}
-
-
-
-	protected abstract void process(I input);
-
-	@Override
+	
+	/**
+	 * Call process with data written to this filter as input.
+	 */
 	public void run() {
 		while ( this.isAlive() ) {
 			I input = this.read();
@@ -41,13 +52,18 @@ public abstract class AbstractPipeSink<I> extends Thread implements InterfacePip
 			}
 		}
 	}
-		
-	public synchronized void start() {
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	public synchronized void begin() {
 		super.start();
 	}
 
-	@Override
-	public void interrupt() {
+	/**
+	 * {@inheritDoc}
+	 */
+	public void end() {
 		super.interrupt();
 	}
 }
