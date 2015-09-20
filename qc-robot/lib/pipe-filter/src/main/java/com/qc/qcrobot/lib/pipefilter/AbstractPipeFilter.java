@@ -1,30 +1,65 @@
 package com.qc.qcrobot.lib.pipefilter;
 
+import java.util.LinkedList;
+import java.util.Queue;
+
 /**
  * Extend this class to implement a PipeFilter
+ * @param <T>
+ * @param <I>
  */
-public abstract class AbstractPipeFilter implements PipeFilterInterface {
+public abstract class AbstractPipeFilter<I, O> extends Thread implements InterfacePipeFilter<I, O> {
 
-	protected PipeFilterInterface output;
+	protected InterfacePipe<O> output;
 	
-	/**
-	 * Connects an output filter as the next filter to receive the input.
-	 */
-	public PipeFilterInterface connect(PipeFilterInterface output) throws PipeSinkConnectionException {
-		return this.output = output;
+	protected Queue<I> queue = new LinkedList<I>();
+	
+	public AbstractPipeFilter(InterfacePipe<O> output) {
+		this.output = output;
+	}
+	
+	
+	@Override
+	public void write(I input) {
+		if ( this.queue != null ) {
+			this.queue.add(input);
+		}
+	}
+	
+	
+
+	@Override
+	public void run() {
+		while ( this.isAlive() ) {
+			I input = this.read();
+			if ( input != null ) {
+				this.filter(input, output);
+			}
+		}
+	}
+	
+	protected I read() {
+		if ( this.queue != null && !this.queue.isEmpty() )  {
+			return this.queue.remove();
+		}
+		return null;
+	}
+	
+	protected abstract void filter(I input, InterfacePipe<O> output);
+
+	
+	public synchronized void start() {
+		super.start();
+		if ( this.output != null ) {
+			this.output.start();
+		}
 	}
 
-	/**
-	 * Writes the processed input as output to the next filter.
-	 * 
-	 * @param output Processed input to be propagated.
-	 * 
-	 * @throws PipeInputTypeException
-	 * @throws PipeMissingSinkException
-	 */
-	protected <T> void write(T output) throws PipeInputTypeException, PipeMissingSinkException {
+	@Override
+	public void interrupt() {
 		if ( this.output != null ) {
-			this.output.read(output);
+			this.output.interrupt();
 		}
+		super.interrupt();
 	}
 }

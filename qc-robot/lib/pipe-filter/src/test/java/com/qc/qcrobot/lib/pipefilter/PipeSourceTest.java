@@ -6,20 +6,32 @@ package com.qc.qcrobot.lib.pipefilter;
  * An example PipeSource used for UnitTesting.
  * Simply writes some input object which is set on construction as output.
  */
-public class PipeSourceTest<T> extends AbstractPipeSource {
+public class PipeSourceTest extends AbstractPipeSource<String> {
 
-	private T input;
 	
-	public PipeSourceTest() {
-		super();
-	}
-	
-	public PipeSourceTest(T input) {
-		super();
-		this.input = input;
+
+	public PipeSourceTest(InterfacePipe<String> output) {
+		super(output);
 	}
 
-	public void start()  throws PipeInputTypeException, PipeMissingSinkException {
-		this.write(this.input);
+
+	@Override
+	protected String read() {
+		return (String) "Hoi";
 	}
+
+//	private T input;
+//	
+//	public PipeSourceTest() {
+//		super();
+//	}
+//	
+//	public PipeSourceTest(T input) {
+//		super();
+//		this.input = input;
+//	}
+//
+//	public void start1()  throws PipeInputTypeException, PipeMissingSinkException {
+//		this.write(this.input);
+//	}
 }
