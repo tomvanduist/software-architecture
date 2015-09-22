@@ -13,6 +13,8 @@ public abstract class AbstractPipeSink<I> extends Thread implements InterfacePip
 	// Input queue
 	protected Queue<I> queue = new LinkedList<I>();
 	
+	public volatile boolean running = false;
+	
 	
 	/**
 	 * Implement this method to process the input as the last filter in the chain.
@@ -26,8 +28,8 @@ public abstract class AbstractPipeSink<I> extends Thread implements InterfacePip
 	 * {@inheritDoc}
 	 */
 	protected I read() {
-		if ( this.queue != null && !this.queue.isEmpty() )  {
-			return this.queue.remove();
+		if ( this.queue != null )  {
+			return this.queue.poll();
 		}
 		return null;
 	}
@@ -45,7 +47,7 @@ public abstract class AbstractPipeSink<I> extends Thread implements InterfacePip
 	 * Call process with data written to this filter as input.
 	 */
 	public void run() {
-		while ( this.isAlive() ) {
+		while ( this.running && this.isAlive() ) {
 			I input = this.read();
 			if ( input != null ) {
 				this.process(input);
@@ -56,14 +58,24 @@ public abstract class AbstractPipeSink<I> extends Thread implements InterfacePip
 	/**
 	 * {@inheritDoc}
 	 */
-	public synchronized void begin() {
+	public synchronized void startPipe() {
+		this.running = true;
 		super.start();
 	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	public void joinPipe() throws InterruptedException {
+		this.join();
+	}
+
 
 	/**
 	 * {@inheritDoc}
 	 */
-	public void end() {
+	public void stopPipe() {
+		this.running = false;
 		super.interrupt();
 	}
 }

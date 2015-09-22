@@ -30,16 +30,18 @@ public class PipeTest extends TestCase {
      * Simply test the troughput of the pipe with a string
      * 
      * @throws PipeMissingSinkException
+     * @throws InterruptedException 
      */
-    public synchronized void testPipeThroughput() throws PipeMissingSinkException {
+    public synchronized void testPipeThroughput() throws PipeMissingSinkException, InterruptedException {
     	PipeSinkTest sink = new PipeSinkTest();
     	PipeFilterStringTest filter = new PipeFilterStringTest(sink);
     	PipeSourceTest source = new PipeSourceTest("test", filter);
     	
-    	// TODO: Writed threaded tests
-    	filter.write(source.read());
-    	filter.filter(filter.read(), sink);
-    	sink.process(sink.read());
+    	source.startPipe();
+    	
+    	this.wait(0, 1);
+    	source.stopPipe();
+		source.joinPipe();
     	
     	assertEquals("test", sink.outputString);
     }

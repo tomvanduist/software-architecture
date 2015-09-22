@@ -10,6 +10,7 @@ public class PipeSourceTest extends AbstractPipeSource<String> {
 
 	private String input;
 
+	
 	public PipeSourceTest(String input, InterfacePipe<String> output) {
 		super(output);
 		this.input = input;
@@ -20,27 +21,4 @@ public class PipeSourceTest extends AbstractPipeSource<String> {
 	protected String read() {
 		return input;
 	}
-
-
-//	@Override
-//	public synchronized void begin() throws PipeMissingSinkException {
-//		super.run();
-//	}
-	
-	
-
-//	private T input;
-//	
-//	public PipeSourceTest() {
-//		super();
-//	}
-//	
-//	public PipeSourceTest(T input) {
-//		super();
-//		this.input = input;
-//	}
-//
-//	public void start1()  throws PipeInputTypeException, PipeMissingSinkException {
-//		this.write(this.input);
-//	}
 }

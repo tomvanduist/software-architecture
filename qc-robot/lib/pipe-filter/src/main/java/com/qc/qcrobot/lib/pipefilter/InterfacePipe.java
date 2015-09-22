@@ -16,11 +16,20 @@ public interface InterfacePipe<I> extends Runnable {
 	
 	/**
 	 * Begin operations.
+	 * 
+	 * @throws PipeMissingSinkException
 	 */
-	public void begin() throws PipeMissingSinkException;
+	public void startPipe() throws PipeMissingSinkException;
+	
+	/**
+	 * Join threads
+	 * 
+	 * @throws InterruptedException
+	 */
+	public void joinPipe() throws InterruptedException;
 	
 	/**
 	 * End operations.
 	 */
-	public void end();
+	public void stopPipe();
 }

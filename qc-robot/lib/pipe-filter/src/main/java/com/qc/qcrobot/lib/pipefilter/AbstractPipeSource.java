@@ -10,6 +10,8 @@ public abstract class AbstractPipeSource<O> extends Thread implements InterfaceP
 	// Output to write generated input
 	protected InterfacePipe<O> output;
 	
+	protected volatile boolean running = false;
+	
 	
 	/**
 	 * Initialize with next filter in the chain.
@@ -33,7 +35,7 @@ public abstract class AbstractPipeSource<O> extends Thread implements InterfaceP
 	 * Write data from calling read() to the output filter.
 	 */
 	public void run() {
-		while ( this.isAlive() && this.output != null ) {
+		while ( this.running && this.isAlive() && this.output != null ) {
 			this.output.write(this.read());
 		}
 	}
@@ -41,22 +43,38 @@ public abstract class AbstractPipeSource<O> extends Thread implements InterfaceP
 	/**
 	 * {@inheritDoc}
 	 */
-	public synchronized void begin() throws PipeMissingSinkException {
+	public synchronized void startPipe() throws PipeMissingSinkException {
+		this.running = true;
 		super.start();
+		
 		if ( this.output != null ) {
-			this.output.begin();
+			this.output.startPipe();
 		} else {
 			throw new PipeMissingSinkException();
 		}
 	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	public void joinPipe() throws InterruptedException {
+		if ( this.output != null ) {
+			this.output.joinPipe();
+		}
+		
+		this.join();
+	}
+
 
 	/**
 	 * {@inheritDoc}
 	 */
-	public void end() {
+	public void stopPipe() {
 		if ( this.output != null ) {
-			this.output.end();
+			this.output.stopPipe();
 		}
+		
+		this.running = false;
 		super.interrupt();
 	}
 

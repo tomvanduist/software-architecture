@@ -17,6 +17,8 @@ public abstract class AbstractPipeFilter<I, O> extends Thread implements Interfa
 	// Input queue
 	protected Queue<I> queue = new LinkedList<I>();
 	
+	public volatile boolean running = false;
+	
 	
 	/**
 	 * Initialize with next filter in the chain.
@@ -40,8 +42,8 @@ public abstract class AbstractPipeFilter<I, O> extends Thread implements Interfa
 	 * {@inheritDoc}
 	 */
 	protected I read() {
-		if ( this.queue != null && !this.queue.isEmpty() )  {
-			return this.queue.remove();
+		if ( this.queue != null )  {
+			return this.queue.poll();
 		}
 		return null;
 	}
@@ -59,7 +61,7 @@ public abstract class AbstractPipeFilter<I, O> extends Thread implements Interfa
 	 * Let input data be handled by the filter. The filter should write the handled data to the output.
 	 */
 	public void run() {
-		while ( this.isAlive() ) {
+		while ( this.running && this.isAlive() ) {
 			I input = this.read();
 			if ( input != null ) {
 				this.filter(input, output);
@@ -70,22 +72,37 @@ public abstract class AbstractPipeFilter<I, O> extends Thread implements Interfa
 	/**
 	 * {@inheritDoc}
 	 */
-	public synchronized void begin() throws PipeMissingSinkException {
+	public synchronized void startPipe() throws PipeMissingSinkException {
+		this.running = true;
 		super.start();
+		
 		if ( this.output != null ) {
-			this.output.begin();
+			this.output.startPipe();
 		} else {
 			throw new PipeMissingSinkException();
 		}
+	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	public void joinPipe() throws InterruptedException {
+		if ( this.output != null ) {
+			this.output.joinPipe();
+		}
+		
+		this.join();
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	public void end() {
+	public void stopPipe() {
 		if ( this.output != null ) {
-			this.output.end();
+			this.output.stopPipe();
 		}
+		
+		this.running = false;
 		super.interrupt();
 	}
 }
