@@ -1,7 +1,5 @@
 package com.qc.qcrobot.lib.pipefilter;
 
-import org.junit.rules.Timeout;
-
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;

@@ -1,8 +1,6 @@
 package com.qc.qcrobot.lib.pipefilter;
 
 /**
- * @param <T>
- * 
  * An example PipeSource used for UnitTesting.
  * Simply writes some input object which is set on construction as output.
  */
