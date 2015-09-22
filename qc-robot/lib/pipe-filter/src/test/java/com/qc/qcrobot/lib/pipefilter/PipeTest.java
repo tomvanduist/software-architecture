@@ -25,61 +25,30 @@ public class PipeTest extends TestCase {
     }
     
     /**
-     * Tests the pipeline with an Integer.
+     * Simply test the troughput of the pipe with a string
      * 
-     * @throws Exception
+     * @throws PipeMissingSinkException
+     * @throws InterruptedException 
      */
-    public void testPipelineInteger() throws Exception {
-    	PipeSourceTest<Integer> source = new PipeSourceTest<Integer>(0);
-    	PipeFilterIntegerTest filter = new PipeFilterIntegerTest();
+    public synchronized void testPipeThroughput() throws PipeMissingSinkException, InterruptedException {
     	PipeSinkTest sink = new PipeSinkTest();
+    	PipeFilterStringTest filter = new PipeFilterStringTest(sink);
+    	PipeSourceTest source = new PipeSourceTest("test", filter);
     	
-    	source.connect(filter).connect(sink);
+    	source.startPipe();
     	
-    	source.start();
+    	this.wait(0, 1);
+    	source.stopPipe();
+		source.joinPipe();
     	
-    	assertTrue(sink.outputInt == 1);
-    }
-    
-    /**
-     * Tests the pipeline with a String.
-     * 
-     * @throws Exception
-     */
-    public void testPipelineString() throws Exception {
-    	PipeSourceTest<String> source = new PipeSourceTest<String>("ppp");
-    	PipeFilterStringTest filter = new PipeFilterStringTest();
-    	PipeSinkTest sink = new PipeSinkTest();
-    	
-    	source.connect(filter).connect(sink);
-    	
-    	source.start();
-    	
-    	assertTrue(sink.outputString.equals("ccc"));
-    }
-    
-    /**
-     * Tests if PipeInputTypeException is properly thrown.
-     */
-    public void testPipeInputTypeException() {
-    	PipeSourceTest<Integer> source = new PipeSourceTest<Integer>(0);
-    	PipeFilterStringTest filter = new PipeFilterStringTest();
-    	
-    	try {
-    		source.connect(filter);
-    		source.start();
-    	} catch (Exception e) {
-    		if ( !(e instanceof PipeInputTypeException) ) {
-    			fail("Expected Exception: " + new PipeInputTypeException().getMessage());
-    		}
-    	}
+    	assertEquals("test", sink.outputString);
     }
 
     /**
      * Tests if PipeMissingSinkException is thrown when the Pipe does not contain a Sink.
      */
     public void testPipeMissingSinkException() {
-    	PipeSourceTest<Object> source = new PipeSourceTest<Object>();
+    	PipeSourceTest source = new PipeSourceTest(null, null);
     	
     	try {
     		source.start();
@@ -89,20 +58,4 @@ public class PipeTest extends TestCase {
     		}
     	}
     }
-    
-    /**
-     * Tests if PipeSinkConnectionException is thrown when a filter is connected as output to a Sink.
-     */
-    public void testPipeSinkConnectionException() {
-    	PipeSinkTest sink = new PipeSinkTest();
-    	
-    	try {
-    		sink.connect(sink);
-    	} catch (Exception e) {
-    		if ( !(e instanceof PipeSinkConnectionException) ) {
-    			fail("Expected Exception: " + new PipeSinkConnectionException().getMessage());
-    		}
-    	}
-    }
-    
 }
