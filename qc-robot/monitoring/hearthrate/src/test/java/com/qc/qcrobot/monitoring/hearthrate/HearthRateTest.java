@@ -3,13 +3,12 @@ package com.qc.qcrobot.monitoring.hearthrate;
 import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
 
+import com.qc.qcrobot.lib.pt_1.Filter;
+import com.qc.qcrobot.lib.pt_1.Pipe;
 import com.qc.qcrobot.monitoring.hearthrate.filter.HearthBeatAggregate;
 import com.qc.qcrobot.monitoring.hearthrate.filter.HearthRateAggragate;
 import com.qc.qcrobot.monitoring.hearthrate.filter.HearthRateSink;
 
-import core.Filter.Filter;
-import core.Filter.Pipe;
-import core.Filter.Sink;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;

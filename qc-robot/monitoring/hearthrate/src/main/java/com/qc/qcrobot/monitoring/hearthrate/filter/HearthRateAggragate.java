@@ -1,10 +1,10 @@
 package com.qc.qcrobot.monitoring.hearthrate.filter;
 
+import com.qc.qcrobot.lib.pt_1.Filter;
+import com.qc.qcrobot.lib.pt_1.IPipe;
 import com.qc.qcrobot.monitoring.hearthrate.HearthBeat;
 import com.qc.qcrobot.monitoring.hearthrate.HearthRate;
 
-import core.Filter.Filter;
-import core.Filter.IPipe;
 
 public class HearthRateAggragate extends Filter<HearthBeat, HearthRate> {
 	

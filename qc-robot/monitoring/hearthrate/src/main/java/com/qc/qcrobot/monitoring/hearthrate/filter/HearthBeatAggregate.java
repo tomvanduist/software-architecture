@@ -2,10 +2,10 @@ package com.qc.qcrobot.monitoring.hearthrate.filter;
 
 import java.util.Date;
 
+import com.qc.qcrobot.lib.pt_1.Filter;
+import com.qc.qcrobot.lib.pt_1.IPipe;
 import com.qc.qcrobot.monitoring.hearthrate.HearthBeat;
 
-import core.Filter.Filter;
-import core.Filter.IPipe;
 
 public class HearthBeatAggregate extends Filter<Integer, HearthBeat> {
 	

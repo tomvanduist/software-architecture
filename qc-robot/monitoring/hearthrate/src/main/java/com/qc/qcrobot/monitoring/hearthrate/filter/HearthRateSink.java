@@ -1,9 +1,9 @@
 package com.qc.qcrobot.monitoring.hearthrate.filter;
 
+import com.qc.qcrobot.lib.pt_1.IPipe;
+import com.qc.qcrobot.lib.pt_1.Sink;
 import com.qc.qcrobot.monitoring.hearthrate.HearthRate;
 
-import core.Filter.IPipe;
-import core.Filter.Sink;
 
 public class HearthRateSink extends Sink<HearthRate> {
 	

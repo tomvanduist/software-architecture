@@ -4,8 +4,9 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
 
-import core.Filter.Filter;
-import core.Filter.IPipe;
+import com.qc.qcrobot.lib.pt_1.Filter;
+import com.qc.qcrobot.lib.pt_1.IPipe;
+
 
 /* Filters all lines from a file that contain a given keyword */
 
