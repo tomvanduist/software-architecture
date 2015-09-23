@@ -1,7 +1,6 @@
 package com.qc.qcrobot.monitoring.hearthrate;
 
-import core.Filter.Filter;
-import core.Filter.IPipe;
+import com.qc.qcrobot.lib.pt_1.*;
 
 public class HearthRateDataSource extends Filter<Enum, Boolean> {
 
