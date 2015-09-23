@@ -15,11 +15,9 @@
 	<url>http://maven.apache.org</url>
 	<dependencies>
 		 <dependency>
-			<groupId>core.Filter</groupId>
-			<artifactId>AwesomeO</artifactId>
-            <scope>system</scope> 
-			<version>1.0</version>
-			<systemPath>/Users/Tom/Documents/Master/Projects/master-software-architecture-project/qc-robot/lib/AwesomeO/AwesomO.jar</systemPath> 
+			<groupId>com.qc.qcrobot.lib.pt_1</groupId>
+			<artifactId>pt_1</artifactId> 
+			<version>1.0-FINAL</version>
 		</dependency> 
 	</dependencies>
 	<modules>
