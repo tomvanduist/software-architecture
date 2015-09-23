@@ -1,20 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <parent>
-    <groupId>com.qc.qcrobot</groupId>
-    <artifactId>qc-robot</artifactId>
-    <version>1.0-SNAPSHOT</version>
-  </parent>
-  <groupId>com.qc.qcrobot.monitoring</groupId>
-  <packaging>pom</packaging>
-  <artifactId>monitoring</artifactId>
-  <version>1.0-SNAPSHOT</version>
-  <name>monitoring</name>
-  <url>http://maven.apache.org</url>
-  <dependencies>
-  </dependencies>
-  <modules>
-    <module>hearthrate</module>
-  </modules>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.qc.qcrobot</groupId>
+		<artifactId>qc-robot</artifactId>
+		<version>1.0-SNAPSHOT</version>
+	</parent>
+	<groupId>com.qc.qcrobot.monitoring</groupId>
+	<packaging>pom</packaging>
+	<artifactId>monitoring</artifactId>
+	<version>1.0-SNAPSHOT</version>
+	<name>monitoring</name>
+	<url>http://maven.apache.org</url>
+	<dependencies>
+		 <dependency>
+			<groupId>core.Filter</groupId>
+			<artifactId>AwesomeO</artifactId>
+            <scope>system</scope> 
+			<version>1.0</version>
+			<systemPath>/Users/Tom/Documents/Master/Projects/master-software-architecture-project/qc-robot/lib/AwesomeO/AwesomO.jar</systemPath> 
+		</dependency> 
+	</dependencies>
+	<modules>
+		<module>hearthrate</module>
+	</modules>
 </project>
