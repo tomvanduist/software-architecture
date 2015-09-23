@@ -1,0 +1,5 @@
+[01.00]: patient died
+[02:00]: patient still dead
+[03:00]: medical staff alerted
+[07:00]: medical staff arrived
+[12:00]: robot (me) is sad
