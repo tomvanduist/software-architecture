@@ -23,6 +23,7 @@
   <modules>
     <module>lib</module>
     <module>controller</module>
+    <module>monitoring</module>
   </modules>
   <build>
     <plugins>
