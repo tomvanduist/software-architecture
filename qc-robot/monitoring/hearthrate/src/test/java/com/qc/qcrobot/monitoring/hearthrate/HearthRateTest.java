@@ -86,7 +86,7 @@ public class HearthRateTest extends TestCase {
         rateAggragate.stop();
         rateSink.stop();
         
-        System.out.println("Measured hearthrate: " + rateSink.getHearthRate().getBeatsPerMinute());
+        System.out.println("Measured hearthrate: " + rateSink.getHearthRate().getBeatsPerMinute() + " BPM");
         
         assertTrue(rateSink.getHearthRate().getBeatsPerMinute() > 0);
     }

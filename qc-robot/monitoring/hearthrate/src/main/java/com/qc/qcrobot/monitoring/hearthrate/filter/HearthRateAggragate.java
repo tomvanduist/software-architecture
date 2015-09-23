@@ -19,7 +19,6 @@ public class HearthRateAggragate extends Filter<HearthBeat, HearthRate> {
 	    try {
 	    	HearthBeat hearthBeat;
             while ((hearthBeat = inputPipe.nextOrNullIfEmptied()) != null) {
-//            	System.out.println(hearthBeat);
             	currentHearthRate.addHearthBeat(hearthBeat);
             	outputPipe.put(currentHearthRate);
             }
@@ -34,12 +33,6 @@ public class HearthRateAggragate extends Filter<HearthBeat, HearthRate> {
 
 	@Override
 	protected HearthRate transformOne(HearthBeat hearthBeat) {
-		if ( currentHearthRate == null ) {
-			currentHearthRate = new HearthRate();
-		}
-		
-		currentHearthRate.addHearthBeat(hearthBeat);
-		
 		return null;
 	}
 
