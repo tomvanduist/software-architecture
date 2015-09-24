@@ -22,5 +22,6 @@
 	<modules>
 		<module>hearthrate</module>
     <module>logging</module>
+    <module>emotion</module>
   </modules>
 </project>
