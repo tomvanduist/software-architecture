@@ -13,6 +13,7 @@ public class ElderMood {
 			this.elders = new ArrayList<>();
 		}
 		
+		// The output format of this filter, could also output this to a file writer
 		elders.add(date + " | " + name + " | " + mood);
 	
 	}

@@ -19,7 +19,6 @@ public class ElderFrequency {
 		if ( this.Frequencies == null ) {
 			this.Frequencies = new ArrayList<>();
 		}
-		System.out.println(hz.toString());
 		
 		this.Frequencies.add(hz);		
 	}
@@ -27,18 +26,22 @@ public class ElderFrequency {
 	
 	public HZ getAvarageFrequency(){
 		
-		int Freq = 0;
+		Long Freq = 0L;
 		if (Frequencies != null){
 	
 			for (HZ hz: Frequencies){
 				Freq += hz.getHZ();
 			}
-			avgHZ = new HZ(Freq);
+			
+			Integer avarage = (int) (Freq / (long) Frequencies.size());
+			
+			avgHZ = new HZ(avarage);
 			
 		}else{ 
 			
 			avgHZ = new HZ(0);
 		}
+		
 		return avgHZ;
 	}
 	
