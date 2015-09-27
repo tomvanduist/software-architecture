@@ -3,6 +3,7 @@ package com.qc.qcrobot.monitoring.logging;
 import java.io.BufferedReader;
 import java.io.StringWriter;
 import java.util.Date;
+import java.util.List;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
@@ -43,12 +44,12 @@ public class KeyWordFilterTest
     {
         return new TestSuite( KeyWordFilterTest.class );
     }
-     
+    
     /**
-     * Rigourous Test :-)
+     * Test using two keywords. TestFile can be found in logging module root folder.
      * @throws InterruptedException 
      */
-    public void testApp() throws InterruptedException
+    public void testTwoKeywords() throws InterruptedException
     {	
     	// Create input and output pipes.
     	Pipe<String> input = new Pipe<>();
@@ -63,30 +64,29 @@ public class KeyWordFilterTest
     		while((s = br.readLine())!= null) {
     			input.put(s);
     		}
+    		br.close();
     	} catch (IOException x) {
     	    System.err.format("IOException: %s%n", x);
     	}
         
-        Date din, dout;
-        din = new Date();
-        dout = new Date();
-
-        //Create keyword filter, coupled to sink.
+        //Create keyword filters, couple to sink.
     	Filter<String, String> keywordFilter = new KeywordFilter(input, out1, "medical");
-    	Filter<String, String> dateFilter = new DateFilter(out1, out2, din, dout);
+    	Filter<String, String> keywordFilter2 = new KeywordFilter(out1, out2, "Janssen");
     	StringSink sink = new StringSink(out2);
         
     	keywordFilter.start();
-    	dateFilter.start();
+    	keywordFilter2.start();
         sink.start();
 
         keywordFilter.stop();
-    	dateFilter.stop();
+    	keywordFilter2.stop();
         sink.stop();
         
         Thread.sleep(300);
-            
+        
+        List<String> result = sink.getOutput();
+        String filtered = "2015.09.27 at 22:08:52: medical staff alerted, mrs Janssen in trouble";
         System.out.println("test finished");
-        assertTrue( true );
+        assertTrue( filtered.equals(result.get(0)));
     }
 }
