@@ -1,0 +1,3 @@
+
+— Create package
+mvn -B archetype:generate -DarchetypeGroupId=org.apache.maven.archetypes -DgroupId=com.qc.qcrobot.monitoring.hearthrate -DartifactId=hearthrate
