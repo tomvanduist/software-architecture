@@ -51,7 +51,7 @@ public class DateFilter extends Filter <String, String> {
 	protected String transformOne(String in) {
 		//get input:
 		try {
-            DateFormat df = new SimpleDateFormat("EEE MMM dd kk:mm:ss zzz yyyy");
+            DateFormat df = new SimpleDateFormat("yyyy.MM.dd 'at' HH:mm:ss");
             Date result =  df.parse(in);
             System.out.println(result); 
             if (result.after(min) && result.before(max)) {
