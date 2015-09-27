@@ -4,23 +4,17 @@ import java.util.Date;
 
 public class Audio {
 
-		protected int length;
-		protected int sound;
+		protected Long sound;
 		protected String person;
 		protected Date date;
 		
-		public Audio ( int length, int sound, String person, Date date ) {
-			this.length = length;
+		public Audio (Long sound, String person, Date date ) {
 			this.sound = sound;
 			this.date = date;
 			this.person = person;	
 		}
-
-		public int getLength() {
-			return length;
-		}
 		
-		public int getSound() {
+		public Long getSound() {
 			return sound;
 		}
 		

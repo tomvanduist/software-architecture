@@ -11,8 +11,9 @@ public class Frequencies {
 		if ( this.frequenties == null ) {
 			this.frequenties = new ArrayList<>();
 		}
+		
+		// Add the item to the list
 		frequenties.add(freq);
-	
 	}
 	
 	public List<ElderFrequency> getData(){
