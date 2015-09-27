@@ -20,3 +20,6 @@ Open terminal in the root folder (qcrobot) than you can run the following comman
 * Test everything: mvn test
 * Test pipe-filter: mvn test -pl lib/pipe-filter
 * Clean the project: mvn clean
+
+## Documentation 
+We use javadoc to document the source-code, maven will automatically generated this documentation in component/target/site when using the package command. 
